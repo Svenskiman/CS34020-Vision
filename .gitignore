@@ -1,0 +1,6 @@
+.DS_Store
+.idea/
+.env
+
+# Ignored as files are too large
+/Data/Samples/Videos/
