@@ -4,6 +4,7 @@ import matplotlib
 
 from tests.test_channels import test_channels
 from tests.test_thresholding import test_thresholding
+from tests.test_filtering import test_filtering
 
 
 if __name__ == "__main__":
@@ -23,15 +24,25 @@ if __name__ == "__main__":
     #     display = display,
     # )
 
-    test_thresholding(
+    # test_thresholding(
+    #     image_path=path,
+    #     colour_space="LAB",
+    #     channel="LAB-Red-Green (A)",
+    #     threshold_methods=["binary", "otsu", "adaptive"],
+    #     threshold=160,
+    #     block_size=101,
+    #     c=-2,
+    #     display=display,
+    # )
+
+    test_filtering(
         image_path=path,
         colour_space="LAB",
         channel="LAB-Red-Green (A)",
-        threshold_methods=["binary", "otsu", "adaptive"],
-        threshold=172,
-        block_size=101,
-        c=-2,
-        display=display,
+        blur_methods=["median", "gaussian", "box"],
+        threshold_method="binary",
+        kernel_size=11,
+        threshold=160,
     )
 
     if display:
