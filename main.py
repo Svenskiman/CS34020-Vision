@@ -4,16 +4,19 @@ import matplotlib
 
 from tests.test_channels import test_channels
 from tests.test_thresholding import test_thresholding
-from tests.test_filtering import test_filtering
+from tests.test_filtering import (
+    test_filtering,
+    examine_image_noise
+)
 
 
 if __name__ == "__main__":
 
-    # print(
-    #     f"OpenCV version: {cv.__version__},\n"
-    #     f"NumPy version: {np.__version__},\n"
-    #     f"Matplotlib version: {matplotlib.__version__},\n"
-    # )
+    print(
+        f"OpenCV version: {cv.__version__},\n"
+        f"NumPy version: {np.__version__},\n"
+        f"Matplotlib version: {matplotlib.__version__},\n"
+    )
 
     display = False
     path = "Data/Samples/Images/splat_360.png"
@@ -35,15 +38,20 @@ if __name__ == "__main__":
     #     display=display,
     # )
 
-    test_filtering(
-        image_path=path,
-        colour_space="LAB",
-        channel="LAB-Red-Green (A)",
-        blur_methods=["median", "gaussian", "box"],
-        threshold_method="binary",
-        kernel_size=11,
-        threshold=160,
-    )
+    examine_image_noise(path)
+
+    # test_filtering(
+    #     image_path=path,
+    #     colour_space="LAB",
+    #     channel="LAB-Red-Green (A)",
+    #     blur_methods=["median", "gaussian", "box"],
+    #     threshold_method="binary",
+    #     kernel_size=11,
+    #     threshold=160,
+    #     plot_intensity_profile=True,
+    # )
+
+
 
     if display:
         cv.waitKey(0)
