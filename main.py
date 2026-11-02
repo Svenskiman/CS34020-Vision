@@ -6,7 +6,8 @@ from tests.test_channels import test_channels
 from tests.test_thresholding import test_thresholding
 from tests.test_filtering import (
     test_filtering,
-    examine_image_noise
+    get_blur,
+    examine_image_noise,
 )
 
 
@@ -20,6 +21,7 @@ if __name__ == "__main__":
 
     display = False
     path = "Data/Samples/Images/splat_360.png"
+    mask = "results/tests/filtering/splat_360/Gaussian-11-LAB-Red-Green (A)-Binary-160-Result.png"
 
     # test_channels(
     #     image_path = path,
@@ -38,18 +40,17 @@ if __name__ == "__main__":
     #     display=display,
     # )
 
-    examine_image_noise(path)
-
-    # test_filtering(
-    #     image_path=path,
-    #     colour_space="LAB",
-    #     channel="LAB-Red-Green (A)",
-    #     blur_methods=["median", "gaussian", "box"],
-    #     threshold_method="binary",
-    #     kernel_size=11,
-    #     threshold=160,
-    #     plot_intensity_profile=True,
-    # )
+    test_filtering(
+        image_path=path,
+        colour_space="LAB",
+        channel="LAB-Red-Green (A)",
+        # blur_methods=["gaussian", "median", "box"],
+        blur_methods=["gaussian"],
+        threshold_method="binary",
+        kernel_size=33,
+        threshold=160,
+        plot_intensity_profile=True,
+    )
 
 
 

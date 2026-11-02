@@ -70,14 +70,16 @@ def plot_intensity_profiles(
 
 def examine_image_noise(
     image_to_examine: np.ndarray,
+    title: str = "",
 ) -> None:
     """
     https://www.geeksforgeeks.org/python/opencv-python-program-analyze-image-using-histogram/
     Plot histogram of an image to check noise type.
-    :param image_to_examine:
+    :param image_to_examine: image array
+    :param title: title shown on the plot
     :return: None
     """
-    img = cv.imread(image_to_examine, cv.IMREAD_GRAYSCALE)
+    img = cv.cvtColor(image_to_examine, cv.COLOR_BGR2GRAY)
 
     # Plot image and compare with mask to find coordinates of interest
     # plt.imshow(img, cmap="gray")
@@ -92,6 +94,7 @@ def examine_image_noise(
     part = img[550:590, 540:580]
     plt.hist(part.ravel(), 256, [0, 256], label="Strawberry")
 
+    plt.title(title)
     plt.legend()
     plt.show()
 
@@ -126,6 +129,7 @@ def test_filtering(
     """
 
     image = cv.imread(image_path)
+    examine_image_noise(image, "Original")
     if image is None:
         print(f"Failed to load image at: {image_path}")
         return
@@ -142,6 +146,7 @@ def test_filtering(
     # Blur the original image and then create a mask for the specified channel
     for blur_method in blur_methods:
         blur_name, blurred_image = get_blur(image, blur_method, kernel_size)
+        examine_image_noise(blurred_image, blur_name)
         channel_image = get_channels(blurred_image, colour_space)[channel]
         if plot_intensity_profile:
             images_to_plot[blur_name] = channel_image

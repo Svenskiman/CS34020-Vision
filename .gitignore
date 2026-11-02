@@ -1,6 +1,10 @@
 .DS_Store
 .idea/
+.venv
 .env
+
+src/__pycache__/
+tests/__pycache__/
 
 # Ignored as files are too large
 /Data/Samples/Videos/
