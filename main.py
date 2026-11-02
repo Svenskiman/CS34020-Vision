@@ -9,6 +9,7 @@ from tests.test_filtering import (
     get_blur,
     examine_image_noise,
 )
+from tests.test_contours import test_contours
 
 
 if __name__ == "__main__":
@@ -20,8 +21,9 @@ if __name__ == "__main__":
     )
 
     display = False
-    path = "Data/Samples/Images/splat_360.png"
-    mask = "results/tests/filtering/splat_360/Gaussian-11-LAB-Red-Green (A)-Binary-160-Result.png"
+    sample = 320
+    path = f"Data/Samples/Images/splat_{sample}.png"
+    # mask = "results/tests/filtering/splat_390/Gaussian-33-LAB-Red-Green (A)-Binary-160-Mask.png"
 
     # test_channels(
     #     image_path = path,
@@ -53,6 +55,14 @@ if __name__ == "__main__":
     )
 
 
+    gaussian_mask = f"results/tests/filtering/splat_{sample}/Gaussian-33-LAB-Red-Green (A)-Binary-160-Mask.png"
+
+    test_contours(
+        image_path=path,
+        mask_path=gaussian_mask,
+        min_area=100,
+        display=display,
+    )
 
     if display:
         cv.waitKey(0)
